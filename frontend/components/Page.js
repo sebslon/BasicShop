@@ -19,7 +19,3 @@ export default function Page({ children }) {
     </div>
   );
 }
-
-Page.propTypes = {
-  children: PropTypes.any,
-};

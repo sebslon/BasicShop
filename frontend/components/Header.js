@@ -8,7 +8,7 @@ const Logo = styled.h1`
   margin-left: 2rem;
   position: relative;
   z-index: 2;
-  background-color: red;
+  background-color: var(--primary, red);
   transform: skew(-7deg);
   a {
     color: white;
@@ -46,7 +46,7 @@ export default function Header() {
       <div className="sub-bar">
         <p>Search</p>
       </div>
-      
+
       <Nav />
     </StyledHeader>
   );
