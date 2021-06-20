@@ -12,6 +12,7 @@ export const GlobalStyles = createGlobalStyle`
   html {
     --primary: #7fcdff;
     --secondary: #34b1ff;
+    --darkBlue: #0060ff;
     --red: #ff0000;
     --black: #393939;
     --gray: #3A3A3A;
