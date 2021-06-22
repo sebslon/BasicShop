@@ -7,7 +7,6 @@ export default function useForm(initialState = {}) {
     let { value, name, type } = e.target;
 
     if (type === "number" || name === "price") {
-      console.log(value);
       value = parseInt(value);
     }
 
