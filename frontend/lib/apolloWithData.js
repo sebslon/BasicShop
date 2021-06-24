@@ -5,9 +5,11 @@ import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 
 import { endpoint, prodEndpoint } from '../config';
+import paginationField from './paginationField';
 
 function createClient({ headers, initialState }) {
   return new ApolloClient({
+    connectToDevTools: true,
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
@@ -31,11 +33,12 @@ function createClient({ headers, initialState }) {
         headers,
       }),
     ]),
+    
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
           fields: {
-            
+            allProducts: paginationField(),
           },
         },
       },
