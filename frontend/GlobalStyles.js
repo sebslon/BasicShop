@@ -23,6 +23,7 @@ export const GlobalStyles = createGlobalStyle`
 
     box-sizing: border-box;
     font-size: 62.5%;
+    font-weight: 600;
   }
 
   *, *:before, *:after {
