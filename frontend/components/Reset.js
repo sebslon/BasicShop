@@ -5,56 +5,53 @@ import Form from "./styles/Form";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
 
-const SIGN_UP_MUTATION = gql`
-  mutation SIGN_UP_MUTATION(
+const RESET_MUTATION = gql`
+  mutation RESET_MUTATION(
     $email: String!
-    $name: String!
+    $token: String!
     $password: String!
   ) {
-    createUser(data: { email: $email, name: $name, password: $password }) {
-      id
-      email
-      name
+    redeemUserPasswordResetToken(
+      email: $email
+      token: $token
+      password: $password
+    ) {
+      code
+      message
     }
   }
 `;
 
-export default function SignUp() {
+export default function Reset({ token }) {
   const { inputs, handleChange, resetForm } = useForm({
     email: "",
-    name: "",
     password: "",
+    token,
   });
 
-  const [signUp, { data, loading, error }] = useMutation(SIGN_UP_MUTATION, {
+  const [resetPassword, { data, loading, error }] = useMutation(RESET_MUTATION, {
     variables: inputs,
   });
+
+  const resetError = data?.redeemUserPasswordResetToken?.code
+    ? data?.redeemUserPasswordResetToken
+    : undefined;
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await signUp().catch(console.error);
+    await resetPassword().catch(console.error);
     resetForm();
   }
 
   return (
     <Form method="POST" onSubmit={handleSubmit}>
-      <h2>Sign up for an Account</h2>
-      <DisplayError error={error} />
-
-      <fieldset disabled={loading}>
-        {data?.createUser && <p>Signed up with {data.createUser.email} - you can now sign in.</p>}
-        <label htmlFor="email">
-          Your name
-          <input
-            type="name"
-            name="name"
-            placeholder="Your Name"
-            autoComplete="name"
-            value={inputs.name}
-            onChange={handleChange}
-          />
-        </label>
+      <h2>Reset your Password</h2>
+      <DisplayError error={error || resetError} />
+      <fieldset aria-disabled={loading}>
+        {data?.redeemUserPasswordResetToken === null && (
+          <p>Password changed.</p>
+        )}
 
         <label htmlFor="email">
           Email
@@ -80,7 +77,7 @@ export default function SignUp() {
           />
         </label>
 
-        <button type="submit">Sign In!</button>
+        <button type="submit">Submit</button>
       </fieldset>
     </Form>
   );
