@@ -11,6 +11,7 @@ import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
 
 import { insertSeedData } from "./imp";
+import { sendPasswordResetEmail } from "./lib/mail";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-basicshop";
@@ -27,6 +28,11 @@ const { withAuth } = createAuth({
   initFirstItem: {
     fields: ["name", "email", "password"],
   },
+  passwordResetLink: {
+    async sendToken(args) {
+      await sendPasswordResetEmail(args.token, args.identity);
+    }
+  }
 });
 
 export default withAuth(
