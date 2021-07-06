@@ -2,20 +2,24 @@ import styled from "styled-components";
 
 import { useUser } from "./User";
 
+import { useCart } from "../lib/cartState";
 import formatMoney from "../lib/formatMoney";
 import calcTotalCartPrice from "../lib/calcTotalCartPrice";
 
+import CloseButton from "./styles/CloseButton";
 import { CartContainer, CartHeader } from "./styles/Cart";
 
 export default function Cart() {
   const me = useUser();
+  const { cartOpen, closeCart } = useCart();
 
   if (!me) return null;
 
   return (
-    <CartContainer open>
+    <CartContainer open={cartOpen}>
       <header>
         <CartHeader>{me.name}'s cart</CartHeader>
+        <CloseButton onClick={closeCart}>&times;</CloseButton>
       </header>
 
       <ul>
