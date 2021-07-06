@@ -13,6 +13,7 @@ import { ProductImage } from "./schemas/ProductImage";
 
 import { insertSeedData } from "./imp";
 import { sendPasswordResetEmail } from "./lib/mail";
+import { extendGraphQLSchema } from "./mutations";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-basicshop";
@@ -59,6 +60,7 @@ export default withAuth(
       ProductImage,
       CartItem
     }),
+    extendGraphqlSchema: extendGraphQLSchema,
     ui: {
       isAccessAllowed: ({ session }) => !!session?.data,
     },
