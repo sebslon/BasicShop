@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import Logo from './styles/Logo';
 import StyledHeader from './styles/StyledHeader';
+
+import Cart from './Cart';
 import Nav from "./Nav";
 
 
@@ -20,6 +22,7 @@ export default function Header() {
         <p>Search</p>
       </div>
 
+      <Cart />
     </StyledHeader>
   );
 }
