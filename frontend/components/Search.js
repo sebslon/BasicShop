@@ -4,7 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import { useLazyQuery } from "@apollo/client";
 import { resetIdCounter, useCombobox } from "downshift";
 
-import { DropDown, DropDownItem, SearchContainer } from "./styles/SearchStyles";
+import { DropDown, DropDownItem, SearchContainer } from "./styles/Search";
 
 const SEARCH_PRODUCTS_QUERY = gql`
   query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
