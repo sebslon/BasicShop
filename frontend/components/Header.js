@@ -5,6 +5,7 @@ import StyledHeader from './styles/StyledHeader';
 
 import Cart from './Cart';
 import Nav from "./Nav";
+import Search from "./Search";
 
 
 
@@ -19,7 +20,7 @@ export default function Header() {
       </div>
 
       <div className="sub-bar">
-        <p>Search</p>
+        <Search />
       </div>
 
       <Cart />
