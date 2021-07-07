@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { useUser } from "./User";
+import RemoveFromCart from "./RemoveFromCart";
 
 import { useCart } from "../lib/cartState";
 import formatMoney from "../lib/formatMoney";
@@ -56,6 +57,7 @@ function CartItem({ cartItem }) {
           </em>
         </p>
       </div>
+      <RemoveFromCart id={cartItem.id}/>
     </Item>
   );
 }
