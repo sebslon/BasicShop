@@ -41,6 +41,7 @@ web_modules/
 .env
 .env.test
 .env.production
+.env.local
 
 # Next.js build output
 .next
