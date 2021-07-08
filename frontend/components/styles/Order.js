@@ -35,4 +35,5 @@ const Order = styled.div`
     }
   }
 `;
+
 export default Order;
