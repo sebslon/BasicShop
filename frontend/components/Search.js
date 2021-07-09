@@ -6,27 +6,6 @@ import { resetIdCounter, useCombobox } from "downshift";
 
 import { DropDown, DropDownItem, SearchContainer } from "./styles/Search";
 
-const SEARCH_PRODUCTS_QUERY = gql`
-  query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
-    searchTerms: allProducts(
-      where: {
-        OR: [
-          { name_contains_i: $searchTerm }
-          { description_contains_i: $searchTerm }
-        ]
-      }
-    ) {
-      id
-      name
-      photo {
-        image {
-          publicUrlTransformed
-        }
-      }
-    }
-  }
-`;
-
 export default function Search() {
   resetIdCounter(); //ssr issues fix
 
@@ -97,3 +76,24 @@ export default function Search() {
     </SearchContainer>
   );
 }
+
+const SEARCH_PRODUCTS_QUERY = gql`
+  query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
+    searchTerms: allProducts(
+      where: {
+        OR: [
+          { name_contains_i: $searchTerm }
+          { description_contains_i: $searchTerm }
+        ]
+      }
+    ) {
+      id
+      name
+      photo {
+        image {
+          publicUrlTransformed
+        }
+      }
+    }
+  }
+`;

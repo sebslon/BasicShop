@@ -60,7 +60,7 @@ const StyledNav = styled.ul`
   @media (max-width: 1300px) {
     border-top: 1px solid var(--lightGray);
     width: 100%;
-    justify-content: center;
+    justify-content: flex-end;
     font-size: 1.5rem;
   }
 `;
