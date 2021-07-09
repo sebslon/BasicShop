@@ -12,6 +12,8 @@ import { Order } from "./schemas/Order";
 import { User } from "./schemas/User";
 import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
+import { Role } from "./schemas/Role";
+import { permissionsList } from "./schemas/fields";
 
 import { insertSeedData } from "./imp";
 import { sendPasswordResetEmail } from "./lib/mail";
@@ -35,8 +37,8 @@ const { withAuth } = createAuth({
   passwordResetLink: {
     async sendToken(args) {
       await sendPasswordResetEmail(args.token, args.identity);
-    }
-  }
+    },
+  },
 });
 
 export default withAuth(
@@ -51,10 +53,10 @@ export default withAuth(
       adapter: "mongoose",
       url: databaseURL,
       async onConnect(keystone) {
-        if(process.argv.includes('--seed-data')) {
+        if (process.argv.includes("--seed-data")) {
           await insertSeedData(keystone);
         }
-      }
+      },
     },
     lists: createSchema({
       User,
@@ -62,14 +64,15 @@ export default withAuth(
       ProductImage,
       CartItem,
       OrderItem,
-      Order
+      Order,
+      Role,
     }),
     extendGraphqlSchema: extendGraphQLSchema,
     ui: {
       isAccessAllowed: ({ session }) => !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      User: `id name email`,
+      User: `id name email role { ${permissionsList.join(" ")} }`,
     }),
   })
 );
