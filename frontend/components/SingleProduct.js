@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import StyledSingleProduct from "./styles/StyledSingleProduct";
 
-const SINGLE_ITEM_QUERY = gql`
+export const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
     Product(where: { id: $id }) {
       id
@@ -32,11 +32,11 @@ export default function SingleProduct({ id }) {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <DisplayError error={error} />;
-
+  console.log(data);
   const { Product } = data;
 
   return (
-    <StyledSingleProduct>
+    <StyledSingleProduct data-testid="singleProduct">
       <Head>
         <title>Basic Shop | {Product.name}</title>
       </Head>
