@@ -25,7 +25,7 @@ export default function Pagination({ page }) {
   const pageCount = Math.ceil(count / perPage);
 
   return (
-    <PaginationContainer>
+    <PaginationContainer data-testid="pagination">
       <Head>
         <title>
           BasicShop - Page {page} of {pageCount}

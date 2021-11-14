@@ -5,7 +5,7 @@ import Form from "./styles/Form";
 import useForm from "../lib/useForm";
 import DisplayError from "./ErrorMessage";
 
-const SIGN_UP_MUTATION = gql`
+export const SIGN_UP_MUTATION = gql`
   mutation SIGN_UP_MUTATION(
     $email: String!
     $name: String!
@@ -43,7 +43,9 @@ export default function SignUp() {
       <DisplayError error={error} />
 
       <fieldset disabled={loading}>
-        {data?.createUser && <p>Signed up with {data.createUser.email} - you can now sign in.</p>}
+        {data?.createUser && (
+          <p>Signed up with {data.createUser.email} - you can now sign in.</p>
+        )}
         <label htmlFor="email">
           Your name
           <input
@@ -80,7 +82,7 @@ export default function SignUp() {
           />
         </label>
 
-        <button type="submit">Sign In!</button>
+        <button type="submit">Sign Up!</button>
       </fieldset>
     </Form>
   );
